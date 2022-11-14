@@ -6,3 +6,9 @@ terraform {
     }
   }
 }
+
+provider "oci" {
+  region              = "us-ashburn-1"
+  auth                = "SecurityToken"
+  config_file_profile = "ascodigital"
+}
