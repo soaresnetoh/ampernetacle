@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: html-nginx
+  name: html-nginx
+  namespace: dev
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: html-nginx
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: html-nginx
+    spec:
+      containers:
+      - image: ubuntu/nginx:latest
+        name: nginx
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: html-nginx
+  name: html-nginx
+  namespace: dev
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: html-nginx
+  type: LoadBalancer
+status:
+  loadBalancer: {}
